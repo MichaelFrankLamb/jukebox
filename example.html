@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" alt="" id="currentPhoto">
+    <script>
+        // target img tag
+        var img = document.getElementById('currentPhoto');
+        
+        // mark an array of photos
+        var photosArr = [
+            {
+                id: 0,
+                url: "photos/sharse.jpg"
+            },
+            {
+                id: 1,
+                url: "photos/clown.jpg"
+            },
+            {
+                id: 2,
+                url: "photos/sloth.jpg"
+            }
+        ];
+        
+        // create photoslider object + pass the array into it
+        var photoSlider = {
+            photos: photosArr,
+            currentPhoto: 0,
+        // method to update the source of the image tag
+            showPhoto: function(){
+                img.src = this.photos[this.currentPhoto].src;
+                console.log("Show photo!");
+            },
+        // increase the id # with another method and pass the original function into it to
+        // update the source (and change the image)
+            nextPhoto: function(){
+                this.currentPhoto++;
+                this.showPhoto();
+                console.log("Next photo!");
+            },
+        }
+    </script> 
+</body>
+</html>
