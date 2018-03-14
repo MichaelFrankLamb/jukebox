@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="normalize" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Quick Page</title>
-    <script src="myscript.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <script type="text/javascript" src="newscript.js"></script>
+    <title>Jukebox</title>
 </head>
-<body>
-    <div class="jukebox">
-        <audio id="music">
-            <source src="songs/beethoven-12-variation.mp3" type="audio/mpeg">
-            <source src="songs/boccherini-concerto.mp3" type="audio/mpeg">
-            <source src="songs/tchaikovsky-nocturne.mp3" type="audio/mpeg">
-        </audio>
-        <img id="beethoven" src="https://1.bp.blogspot.com/--v-r6iuAa-o/UDw4b0QyZpI/AAAAAAAAHMg/oucLnzx_UuY/s1600/6+personajes+hist%C3%B3ricos+famosos+con+discapacidades+beethoven.jpg">
-        <img id="boccherini" src="https://seniorplaza.nl/images/old/copied/boccherini,_luigi_rodolfo1743-1805_italie_01.jpg">
-        <img id="tchaikovsky" src="http://www.p.i.cajkovskij.szm.com/file/cajkovski2.jpg">
+<body class="grid">
+    <div id="audio-player-cont" class="subgrid">
+        <div class="logo" class="subgrid">
+            <img src="images/victorLOGO.jpg">
+        </div>
+        <div id="player" class="subgrid">
+            <div id="songTitle" class="song-title">Song title will go here</div>
+            <input id="songSlider" class="song-slider" type="range" min="0" step="1" onchange="seekSong();">
+            <div class="subgrid">
+                <div id="currentTime" class="current-time">00:00</div>
+                <div id="duration" class="duration">00:00</div>
+            </div>
+            <div id="controllers" class="subgrid2">
+                <img src="images/previous.png" width="30px" onclick="previous();">
+                <img src="images/backward.png" width="30px" onclick="decreasePlaybackRate();">
+                <img src="images/play.png" width="30px" onclick="playOrPauseSong(this);">
+                <img src="images/forward.png" width="30px" onclick="increasePlaybackRate();">
+                <img src="images/next.png" width="30px" onclick="next();">
+                <img src="images/volume-down.png" width="15px">
+                <input id="volumeslider" class="volume-slider" type="range" min="0" max="1" step="0.01" onchange="adjustVolume();">
+                <img src="images/volume-up.png" width="15px" style="margin-left:2px;"> 
+            </div>
+            <div id="nextSongTitle" class="songTitle"><b>Next Song :</b>Next song title goes here...  
+            </div>
+        </div>
     </div>
-    <button id="control">Play</button>
-    
 </body>
+    
 </html>
