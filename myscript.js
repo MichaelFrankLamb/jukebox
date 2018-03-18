@@ -1,8 +1,6 @@
-var songs = [ 
-    "beethoven-12-variation.mp3",
-    "boccherini-concerto.mp3",
-    "tchaikovsky-nocturne.mp3"
-];
+var songs = ["beethoven-12-variation.mp3",
+            "boccherini-concerto.mp3",
+            "tchaikovsky-nocturne.mp3"];
 
 var songTitle = document.getElementById('songTitle');
 var songSlider = document.getElementById('songSlider');
@@ -16,25 +14,25 @@ var currentSong = 0;
 
 window.onload = loadSong;
 
-function loadSong () {
+function loadSong() {
     song.src = "songs/" + songs[currentSong];
-    songTitle.textContent = (currentSong + 1) + ". " + songs[currentSong];
+    songTitle.textContent = (currentSong + 1) + ". " + songs[currentSong]; //<==changing textContent methods
     nextSongTitle.innerHTML = "<b>Next Song: </b>" + songs[currentSong + 1 % songs.length];
-    song.playBackRate = 1;
-    song.Volume = volumeSlider.value;
+    song.playbackRate = 1; //
+    song.volume = volumeSlider.value;
     song.play();
-    setTimeout(showDuration, 1000);
+    setTimeout(showDuration, 1000); //
 }
 
 setInterval(updateSongSlider, 1000);
 
-function updateSongSlider () {
-    var c = Math.round(song.currentTime);
+function updateSongSlider() {
+    var c = Math.round(song.currentTime); 
     songSlider.value = c;
-    currentTime.textContent = convertTime(c);
-    if(song.ended){
-        next();
-    }
+    currentTime.textContent = convertTime(c); //<==changing textContent methods
+    if(song.ended){ //
+        next(); //
+    } //
 }
 
 function convertTime (secs) {
@@ -45,14 +43,14 @@ function convertTime (secs) {
     return (min + ":" + sec);
 }
 
-function showDuration () {
+function showDuration() {
     var d = Math.floor(song.duration);
     songsSlider.setAttribute("max", d);
-    duration.textContent = convertTime(d);
+    duration.textContent = convertTime(d); //<==changing textContent methods
 }
 
 function playOrPauseSong (img) {
-    song.playBackRate = 1;
+    song.playbackRate = 1;
     if(song.paused) {
         song.play();
         img.src = "images/pause.png";
@@ -63,30 +61,30 @@ function playOrPauseSong (img) {
 }
 
 
-currentSong = currentSong++ % songs.length;
-function next () {
+function next() {
+    currentSong = currentSong + 1 % songs.length;
     loadSong();
 }
 
-function previous () {
+function previous() {
     currentSong--;
     currentSong = (currentSong < 0) ? songs.length - 1 : currentSong;
     loadSong();
 }
 
-function seekSong () {
+function seekSong() {
     song.currentTime = songSlider.value;
-    currentTime.textContent = convertTime(song.currentTime);
+    currentTime.textContent = convertTime(song.currentTime); //<==changing textContent methods
 }
 
-function adjustVolume () {
+function adjustVolume() {
     song.volume = volumeSlider.value;
 }
 
-function increasePlaybackRate () {
-    songs.playBackRate += 0.5;
+function increasePlaybackRate() {
+    song.playbackRate += 0.5;       
 }
 
-function decreasePlaybackRate () {
-    songs.playBackRate -= 0.5;
+function decreasePlaybackRate() {
+    song.playbackRate -= 0.5;       
 }
