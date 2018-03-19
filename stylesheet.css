@@ -70,6 +70,10 @@ img{
     display: table;
 }
 
+.volume-down{
+    justify-self: end;
+}
+
 .controllers *{
     align-content: center;
     margin-right: 2px;
