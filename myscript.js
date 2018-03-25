@@ -1,81 +1,46 @@
-// var songs = ["beethoven-12-variation.mp3",
-//             "boccherini-concerto.mp3",
-//             "tchaikovsky-nocturne.mp3"];
 
-//var songTitle = document.getElementById('songTitle');
-//var nextSongTitle = document.getElementById('nextSongTitle');
-//var audio = document.createElement('audio')
-
-//var song = new Audio();
-
-function Jukebox(audio, songTitle, nextSongTitle, currentSong, songs){
-    this.audio = document.createElement('audio');
-    this.songTitle = document.getElementById('songTitle');
-    this.nextSongTitle = document.getElementById('nextSongTitle');
-    this.currentSong = 0;
-    this.songs = ["beethoven-12-variation.mp3",
-                "boccherini-concerto.mp3",
-                "tchaikovsky-nocturne.mp3"]
-};
-Jukebox.prototype.loadSong = function(){
-    this.audio.src = "songs/" + this.songs[this.currentSong];
-    this.songTitle.textContent = (this.currentSong + 1) + ". " + this.songs[this.currentSong]; 
-    this.nextSongTitle.innerHTML = "<b>Next Song: </b>" + this.songs[this.currentSong + 1 % this.songs.length];
-    return this.audio.play();
-}
-Jukebox.prototype.playOrPauseSong = function(img) {
-        //    audio.playbackRate = 1;
-            if(this.audio.paused) {
-                this.audio.play();
-                img.src = "images/pause.png";
-            }else{
-                this.audio.pause();
-                img.src = "images/play.png";
-            }
-        };
-Jukebox.prototype.next = function() {
-        this.currentSong = this.currentSong + 1 % this.songs.length;
-        loadSong();
-        },
-Jukebox.prototype.previous = function() {
-        this.currentSong--;
-        this.currentSong = (this.currentSong < 0) ? this.songs.length - 1 : this.currentSong;
-        loadSong();
+function Jukebox(){
+    var music = this;
+    music.audio = document.createElement('audio');
+    music.songTitle = document.getElementById('songTitle');
+    music.nextSongTitle = document.getElementById('nextSongTitle');
+    var next = document.getElementById('next');
+    var prev = document.getElementById('prev');
+    var playPause = document.getElementById('playPause');
+    music.currentSong = 0;
+    music.songs = ["Beethoven's 12th Symphony.mp3",
+                   "Boccherini's Concerto in D.mp3",
+                   "Nocturne by Tchaikovsky.mp3"]
+    music.loadSong = loadSong;
+    function loadSong(){
+    music.audio.src = "songs/" + music.songs[music.currentSong];
+    music.songTitle.textContent = (music.currentSong + 1) + ". " + music.songs[music.currentSong]; 
+    music.nextSongTitle.innerHTML = "<b>Next Song: </b>" + music.songs[(music.currentSong + 1) % +(music.songs.length)];
+    music.audio.play();
     }
+    playPause.addEventListener("click",function playPause(e) {
+            if(music.audio.paused) {
+                music.audio.play();
+                e.target.src = "images/pause.png";
+            }else{
+                music.audio.pause();
+                e.target.src = "images/play.png";
+            }
+        } );
+    next.addEventListener("click",function(e) {
+        ++music.currentSong;
+        music.currentSong = (music.currentSong > 2) ? music.songs.length - 3 : music.currentSong;
+        loadSong();
+    });
 
-    
-//var currentSong = 0;
+    prev.addEventListener("click",function(e) {
+        music.currentSong--;
+        music.currentSong = (music.currentSong < 0) ? music.songs.length - 1 : music.currentSong;
+        loadSong();
+    });
+}
 
-window.onload = Jukebox.loadSong;
+var myJukebox = new Jukebox()
 
-//function loadSong() {
-//    audio.src = "songs/" + songs[currentSong];
-//    songTitle.textContent = (currentSong + 1) + ". " + songs[currentSong]; 
-//     nextSongTitle.innerHTML = "<b>Next Song: </b>" + songs[currentSong + 1 % songs.length];
-//     audio.play();
-// }
+window.onload = myJukebox.loadSong;
 
-
-
-// function playOrPauseSong (img) {
-// //    audio.playbackRate = 1;
-//     if(audio.paused) {
-//         audio.play();
-//         img.src = "images/pause.png";
-//     }else{
-//         audio.pause();
-//         img.src = "images/play.png";
-//     }
-// }
-
-
-// function next() {
-//     currentSong = currentSong + 1 % songs.length;
-//     loadSong();
-// }
-
-// function previous() {
-//     currentSong--;
-//     currentSong = (currentSong < 0) ? songs.length - 1 : currentSong;
-//     loadSong();
-// }
