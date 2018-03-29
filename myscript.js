@@ -7,6 +7,7 @@ function Jukebox(){
     var next = document.getElementById('next');
     var prev = document.getElementById('prev');
     var playPause = document.getElementById('playPause');
+    var stop = document.getElementById('stop'); ///////
     music.currentSong = 0;
     music.songs = ["Beethoven's 12th Symphony.mp3",
                    "Boccherini's Concerto in D.mp3",
@@ -38,6 +39,13 @@ function Jukebox(){
         music.currentSong = (music.currentSong < 0) ? music.songs.length - 1 : music.currentSong;
         loadSong();
     });
+
+    stop.addEventListener("click",function(e) {  //
+        music.audio.pause();
+        music.audio.load();
+        music.audio.src = ""; 
+        music.audio.src = "songs/" + music.songs[music.currentSong];                  
+    });                                           //
 }
 
 var myJukebox = new Jukebox()
